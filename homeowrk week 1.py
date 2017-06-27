@@ -8,21 +8,17 @@ Homework for the first week of our Python class
 
 import sys
 
-# set counter to 0
-i = 0
-
-while True:
-  if i > 0:
-    print()
-    print("Press the enter key to exit the script.")
-  
+while True:  
   try:
     age = input("How old are you: ")
 
-  # if EOF exit the program...
+  # if EOF or Ctrl-C exit the program...
   except EOFError:
     sys.exit(0)
-
+  except KeyboardInterrupt:
+    print("trapped control-c. Ending the script. Thank you.")
+    sys.exit(1)
+    
   # check to see if user has pressed the enter key
   if not age:
     print("Thank you for pressing the enter key... exiting script.")
@@ -38,6 +34,5 @@ while True:
   dog_years = actual_age * 7
   print("That's about ",dog_years, "in dog years.")
   
-   # print()
-   # print("Press the enter key to exit the script.")
-  i += 1
+  print()
+  print("Press the enter key to exit the script.")
