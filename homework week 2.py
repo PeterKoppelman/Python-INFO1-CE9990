@@ -21,6 +21,9 @@ def getInt(prompt):
             s = input(prompt)
         except EOFError:
             sys.exit(1)
+        except KeyboardInterrupt:
+            print("Control-C pressed. Exiting script. Thank you.")
+            sys.exit(1)
         
         # if user has pressed the enter key exit the program
         if not s:
@@ -30,8 +33,9 @@ def getInt(prompt):
         try:
             i = int(s)
         except ValueError:
-            print("I'm sorry ", s, " is not an integer")
+            print("I'm sorry ", s, "is not an integer")
             continue
+                
         return i
 
 
@@ -40,19 +44,21 @@ while True:
   no_columns = getInt("How many columns of boxes: ")
   spaces_rows = getInt("How many rows of spaces are in each box: ")
   spaces_col = getInt("How many columns spaces are in each box: ")
-    
-  i_counter = 0
+  
+  # Create the length of hte horizontal line. Put the "+" on the end to finish off the right hand side of the box
+  horizontal_lines = no_columns * ("+" + (spaces_col * str("-"))) + "+"
+
+  # calculate the number of vertical rows that we need. Print them out every time vert increments.
+  # put the "|" on the end to finish off the right hand side of the box
+  vertical_lines = no_columns * ("|" + (spaces_col * str(" "))) + "|"
+  
   # loop while counter < number of rows that we want. Print the horizontal line every time i_counter increments
-  # put the str("+") on the end to finish off the right hand side of the box
+  i_counter = 0
+
   while i_counter < no_rows:
-    horizontal_lines = no_columns * (str("+") + (spaces_col * str("-"))) + str("+")
     print(horizontal_lines)
     
     vert = 0
-    # calculate the number of vertical rows that we need. Print them out every time vert increments.
-    # put the str("|") on the end to finish off the right hand side of the box
-
-    vertical_lines = no_columns * (str("|") + (spaces_col * str(" "))) + str("|")
     while vert < spaces_rows:
         print(vertical_lines)
         vert+= 1
