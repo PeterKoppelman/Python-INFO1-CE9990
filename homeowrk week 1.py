@@ -14,7 +14,7 @@ i = 0
 while True:
   if i > 0:
     print()
-    print("Press the enter key to exit the routine")
+    print("Press the enter key to exit the script.")
   
   try:
     age = input("How old are you: ")
@@ -25,17 +25,19 @@ while True:
 
   # check to see if user has pressed the enter key
   if not age:
-    print("Thank you for pressing the enter key... exiting routine")
+    print("Thank you for pressing the enter key... exiting script.")
     sys.exit(0)
 
   # if input item is not a float, print an error message
   try:
     actual_age = float(age)
   except ValueError:
-    print ("Sorry", age," is not a number. Please try again.")
+    print ("Sorry", age, "is not a number. Please try again.")
     continue
 
   dog_years = actual_age * 7
-  print("That's about ",dog_years, " in dog years")
+  print("That's about ",dog_years, "in dog years.")
   
+   # print()
+   # print("Press the enter key to exit the script.")
   i += 1
