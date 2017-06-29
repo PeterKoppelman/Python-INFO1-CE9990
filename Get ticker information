@@ -1,0 +1,48 @@
+"""
+
+get ticker.py
+
+
+Get ticker information based on input from user
+
+To avoid the SSL: CERTIFICATE_VERIFY_FAILED error on macOS, run
+
+Applications -> Python 3.6 -> Install Certificates.command
+
+"""
+
+import sys
+
+import urllib.request
+
+
+#For the l1 code, see http://www.jarloo.com/yahoo_finance/
+
+x = input("What ticker do you want information for? ")
+
+url = "http://finance.yahoo.com/d/quotes.csv?s="+x+"&f=nabl"
+
+try:
+
+    u = urllib.request.urlopen(url)
+
+except urllib.error.URLError:
+
+    sys.exit(2)
+
+# readline reads an entire line from a file
+line = u.readline()
+
+#close the open file
+u.close()
+
+print(line)
+
+#try:
+
+    # price = float(line)
+
+# except ValueError:
+
+    # sys.exit(2)
+
