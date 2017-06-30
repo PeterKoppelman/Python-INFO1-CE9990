@@ -51,20 +51,13 @@ while True:
   # calculate the number of vertical rows that we need. Print them out every time vert increments.
   # put the "|" on the end to finish off the right hand side of the box
   vertical_lines = no_columns * ("|" + (spaces_col * str(" "))) + "|"
-  
-  # loop while counter < number of rows that we want. Print the horizontal line every time i_counter increments
-  i_counter = 0
-
-  while i_counter < no_rows:
+    
+  for i in range (0, no_rows):  
     print(horizontal_lines)
     
-    vert = 0
-    while vert < spaces_rows:
+    for j in range(0, spaces_rows):
         print(vertical_lines)
-        vert+= 1
-
-    i_counter += 1
-
+        
   # print out the horizontal line again to finish off the bottom row.  
   print(horizontal_lines)
 
