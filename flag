@@ -1,0 +1,34 @@
+"""
+tkflag_pk.py
+
+Draw a flag in color on a tkinter Canvas widget.
+"""
+import tkinter              #in Python2, the t was uppercase
+import sys
+
+baseUnit = 100
+height = baseUnit * 4
+width = baseUnit *7
+
+#The root widget is the window that will contain everything we draw.
+root = tkinter.Tk()
+root.title("Flag of Mexico")
+root.geometry(str(width) + "x" + str(height))
+
+#highlightthickness = 0 allows the canvas to occupy the entire root.
+canvas = tkinter.Canvas(root, highlightthickness = 0)
+
+# Paint the background white. Use FFFFFF (hex) as the default color white per Wikipedia
+canvas.create_rectangle(0, 0, width, height, width = 0, fill = "#FFFFFF")
+canvas.create_rectangle(0, 0, (baseUnit*7)/3, height, width = 0, fill = "#006847") #Color green
+canvas.create_rectangle((2 * width)/3, 0, width, height, width = 0, fill = "#CE1126") #Color red
+
+# picture_image = "C:\\Users\\madan\\Downloads\\mexico_city.jpeg"
+# Image.open(picture_image)
+   
+#Make the canvas visible by packing it into the root.
+canvas.pack(expand = tkinter.YES, fill = "both")
+
+#If the flag had buttons, checkboxes, etc.,
+#the mainloop would let them respond to touches.
+root.mainloop()
