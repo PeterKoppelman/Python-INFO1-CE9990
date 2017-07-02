@@ -33,7 +33,7 @@ def getInt(prompt):
         try:
             i = int(s)
         except ValueError:
-            print("I'm sorry ", s, "is not an integer")
+            print("I'm sorry,", s, "is not an integer")
             continue
                 
         return i
@@ -46,16 +46,16 @@ while True:
   spaces_col = getInt("How many columns spaces are in each box: ")
   
   # Create the length of hte horizontal line. Put the "+" on the end to finish off the right hand side of the box
-  horizontal_lines = no_columns * ("+" + (spaces_col * str("-"))) + "+"
+  horizontal_lines = no_columns * ("+" + spaces_col * "-") + "+"
 
   # calculate the number of vertical rows that we need. Print them out every time vert increments.
   # put the "|" on the end to finish off the right hand side of the box
-  vertical_lines = no_columns * ("|" + (spaces_col * str(" "))) + "|"
+  vertical_lines = no_columns * ("|" + spaces_col * " ") + "|"
     
-  for i in range (0, no_rows):  
+  for i in range (no_rows):  
     print(horizontal_lines)
     
-    for j in range(0, spaces_rows):
+    for j in range(spaces_rows):
         print(vertical_lines)
         
   # print out the horizontal line again to finish off the bottom row.  
