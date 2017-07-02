@@ -1,0 +1,75 @@
+"""
+spellyourname.py
+
+this program takes your name as input and spells it backward and forward. The associated
+subcripts are printed above the letters.
+"""
+
+import sys
+
+def getStr(prompt):
+
+    """
+    Let the user input their name
+    """
+
+    assert isinstance(prompt, str)
+
+    while True:
+
+        try:
+            s = input(prompt)
+        except EOFError:
+            sys.exit(1)
+        except KeyboardInterrupt:
+            print("Control-C pressed. Exiting script. Thank you.")
+            sys.exit(1)
+        
+        # if user has pressed the enter key exit the program
+        if not s:
+            print("Thank you... exiting routine")
+            sys.exit(0)
+
+        return s
+
+
+while True:
+    name = getStr("What is you name? ")
+
+    nameLength = len(name)
+
+    # Print the number of the variable start with 0
+    for i in range(0, nameLength):
+        print(i, end=" ")
+        
+    print()
+    # Print each letter of the name
+    for i in range(0, nameLength):
+        print(name[i], end=" ")
+
+        # Once we increment psat the 9th letter in the name, create a blank space
+        # to the left of the letter. This make sure that the letter stays under the
+        # number above it.
+        if i >  9:
+            print(" ", end="")
+
+    print()
+    print()
+
+    # Decrement starting with -1 first 
+    for i in range(-1, -nameLength-1, -1):
+        print(i, end=" ")
+    print()
+
+    # Start with the last letter and spell the name backwards
+    for i in range(-1, -nameLength-1, -1):
+        # make sure the letter is spaced under the associated number properly 
+        if i == -1 or i <= -10:
+            print(" ", end="")
+            
+        print(name[i], end="  ")
+    print()
+    print()
+
+  
+sys.exit(0)
