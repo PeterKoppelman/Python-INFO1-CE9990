@@ -5,8 +5,9 @@ Draw a flag in color on a tkinter Canvas widget.
 """
 import tkinter              #in Python2, the t was uppercase
 import sys
+import PIL.ImageTk
 
-baseUnit = 100
+baseUnit = 125
 height = baseUnit * 4
 width = baseUnit *7
 
@@ -23,9 +24,20 @@ canvas.create_rectangle(0, 0, width, height, width = 0, fill = "#FFFFFF")
 canvas.create_rectangle(0, 0, (baseUnit*7)/3, height, width = 0, fill = "#006847") #Color green
 canvas.create_rectangle((2 * width)/3, 0, width, height, width = 0, fill = "#CE1126") #Color red
 
-# picture_image = "C:\\Users\\madan\\Downloads\\mexico_city.jpeg"
-# Image.open(picture_image)
-   
+try:
+    inputFile = PIL.Image.open('c:\\Users\\madan\\Downloads\\mexicocity.jpg')
+except FileNotFoundError as error:
+    print(error)
+    sys.exit(1)
+except PermissionError as error:
+    print(error)
+    sys.exit(1)
+
+myImage = PIL.ImageTk.PhotoImage(inputFile)
+inputFile.close()
+# Center the emblem on the flag on the flag
+canvas.create_image(width/2, height/2, image = myImage)
+
 #Make the canvas visible by packing it into the root.
 canvas.pack(expand = tkinter.YES, fill = "both")
 
