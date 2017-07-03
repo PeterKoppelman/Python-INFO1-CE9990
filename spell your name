@@ -39,19 +39,23 @@ while True:
     nameLength = len(name)
 
     # Print the number of the variable start with 0
-    for i in range(0, nameLength):
+    for i in range(nameLength):
         print(i, end=" ")
         
     print()
     # Print each letter of the name
-    for i in range(0, nameLength):
-        print(name[i], end=" ")
+    # for i in range(nameLength):
+    #    print(name[i], end=" ")
+    for i, c in enumerate(name):
+        # print(c, end = " ")
+        print("{:{}}".format(c, 3 if i >= 10 else 2), end = "")
+        
 
         # Once we increment psat the 9th letter in the name, create a blank space
         # to the left of the letter. This make sure that the letter stays under the
         # number above it.
-        if i >  9:
-            print(" ", end="")
+        # if i >  9:
+            # print(" ", end="")
 
     print()
     print()
