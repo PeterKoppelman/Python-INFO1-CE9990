@@ -13,26 +13,13 @@ import sys
 
 import urllib.request
 
-
 #For the l1 code, see http://www.jarloo.com/yahoo_finance/
 
 x = input("What tickers do you want information for (please separate them with a comma)? ").strip()
-# y = x[0] # the first letter of x becomes the first letter of y
-y = ""
 
-strLen = len(x)
-z = 1 #set variables for the number of ticker symbols we have. Assume at least 1.
-for i in range(0, strLen):
-    # if the character is a space, skip it. We don't want spaces in the final string.
-    if x[i] == " ":
-        continue
-    # parse through the list of tickers. Change each "," to a "+"
-    if x[i] == ",":
-        y = y + "+"
-        # ticker symbols are separted by "'" so we'll increment z to count how many ticker symbols we have
-        z += 1
-    else:
-        y = y + x[i]
+temp = x.replace (",","+") # replace commas with plus signs
+y = temp.replace (" ","") # take out any blank spaces
+z = temp.count("+") + 1
 
 url = "http://finance.yahoo.com/d/quotes.csv?s="+y+"&f=nabl"
 
