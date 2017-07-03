@@ -18,8 +18,8 @@ import urllib.request
 x = input("What tickers do you want information for (please separate them with a comma)? ").strip()
 
 temp = x.replace (",","+") # replace commas with plus signs
-y = temp.replace (" ","") # take out any blank spaces
-z = temp.count("+") + 1
+y = temp.replace (" ","") # take out any internal blank spaces
+z = temp.count("+") + 1 # Count the number of ticker symbols
 
 url = "http://finance.yahoo.com/d/quotes.csv?s="+y+"&f=nabl"
 
@@ -32,7 +32,12 @@ except urllib.error.URLError:
 # readline reads an entire line from a file
 for k in range(0,z):
     line = u.readline()
-    print (line)
+
+    # test to see if the results come back N/A. If it does the ticker symbol that was entered is not valid
+    if (str(line[0:3])) == "b'N/A'":
+        print ("This is not a valid ticker symbol")
+    else:
+        print (line)
 
 #close the open file
 u.close()
