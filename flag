@@ -1,3 +1,4 @@
+
 """
 tkflag_pk.py
 
@@ -27,6 +28,7 @@ canvas.create_rectangle((2 * width)/3, 0, width, height, width = 0, fill = "#CE1
 try:
     inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
     # is there a way to get the file from github? 
+    https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg
     # inputFile = PIL.Image.open('https://github.com/PeterKoppelman/Python-INFO1-CE9990/blob/master/mexicocity.jpg')
 except FileNotFoundError as error:
     print(error)
