@@ -21,11 +21,13 @@ canvas = tkinter.Canvas(root, highlightthickness = 0)
 
 # Paint the background white. Use FFFFFF (hex) as the default color white per Wikipedia
 canvas.create_rectangle(0, 0, width, height, width = 0, fill = "#FFFFFF")
-canvas.create_rectangle(0, 0, (baseUnit*7)/3, height, width = 0, fill = "#006847") #Color green
+canvas.create_rectangle(0, 0, width/3, height, width = 0, fill = "#006847") #Color green
 canvas.create_rectangle((2 * width)/3, 0, width, height, width = 0, fill = "#CE1126") #Color red
 
 try:
-    inputFile = PIL.Image.open('c:\\Users\\madan\\Downloads\\mexicocity.jpg')
+    inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
+    # is there a way to get the file from github? 
+    # inputFile = PIL.Image.open('https://github.com/PeterKoppelman/Python-INFO1-CE9990/blob/master/mexicocity.jpg')
 except FileNotFoundError as error:
     print(error)
     sys.exit(1)
@@ -33,7 +35,12 @@ except PermissionError as error:
     print(error)
     sys.exit(1)
 
+# inputFile = inputFile.resize((200, 200)) #new statement, need extra parens to make it a tuple
+# calculate width of Emblem
+EmblemWidth = int((width/3) - (width/3 - width/4))
+inputFile = inputFile.resize((EmblemWidth, 200)) #new statement, need extra parens to make it a tuple
 myImage = PIL.ImageTk.PhotoImage(inputFile)
+
 inputFile.close()
 # Center the emblem on the flag on the flag
 canvas.create_image(width/2, height/2, image = myImage)
