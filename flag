@@ -1,4 +1,3 @@
-
 """
 tkflag_pk.py
 
@@ -7,6 +6,7 @@ Draw a flag in color on a tkinter Canvas widget.
 import tkinter              #in Python2, the t was uppercase
 import sys
 import PIL.ImageTk
+import urllib.request
 
 baseUnit = 125
 height = baseUnit * 4
@@ -25,23 +25,29 @@ canvas.create_rectangle(0, 0, width, height, width = 0, fill = "#FFFFFF")
 canvas.create_rectangle(0, 0, width/3, height, width = 0, fill = "#006847") #Color green
 canvas.create_rectangle((2 * width)/3, 0, width, height, width = 0, fill = "#CE1126") #Color red
 
+# try:
+# inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
+url = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg"
 try:
-    inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
-    # is there a way to get the file from github? 
-    https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg
-    # inputFile = PIL.Image.open('https://github.com/PeterKoppelman/Python-INFO1-CE9990/blob/master/mexicocity.jpg')
+    inputFile = urllib.request.urlopen(url)
+except urllib.error.URLError as error:
+    print("urllib.error.URLError", error)
+    sys.exit(1)
 except FileNotFoundError as error:
     print(error)
     sys.exit(1)
 except PermissionError as error:
     print(error)
     sys.exit(1)
+        
+myData = inputFile.read()
+myImage = PIL.ImageTk.PhotoImage(data = myData)
 
-# inputFile = inputFile.resize((200, 200)) #new statement, need extra parens to make it a tuple
+# inputFile = inputFile.resize((200, 200)) new statement, need extra parens to make it a tuple
 # calculate width of Emblem
-EmblemWidth = int((width/3) - (width/3 - width/4))
-inputFile = inputFile.resize((EmblemWidth, 200)) #new statement, need extra parens to make it a tuple
-myImage = PIL.ImageTk.PhotoImage(inputFile)
+# EmblemWidth = int((width/3) - (width/3 - width/4))
+# inputFile = inputFile.resize((EmblemWidth, 200)) #new statement, need extra parens to make it a tuple
+# myImage = PIL.ImageTk.PhotoImage(inputFile)
 
 inputFile.close()
 # Center the emblem on the flag on the flag
