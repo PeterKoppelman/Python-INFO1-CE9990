@@ -18,10 +18,9 @@ root = tkinter.Tk()
 root.geometry(str(width) + "x" + str(height))
 root.update_idletasks() # had to do this or root.winfo_width was 1...
 
-width = int(root.winfo_width() / 3.5) # get root width and scale it ( in pixels )
-title = title.rjust(width//2)
-root.title(title)
-
+titleWidth = int(root.winfo_width() / 3.5) # get root width and scale it ( in pixels )
+print_title = title.rjust(titleWidth//2)
+root.title(print_title)
 
 #highlightthickness = 0 allows the canvas to occupy the entire root.
 canvas = tkinter.Canvas(root, highlightthickness = 0)
