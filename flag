@@ -11,11 +11,17 @@ import urllib.request
 baseUnit = 125
 height = baseUnit * 4
 width = baseUnit *7
+title = "Flag of Mexico"
 
 #The root widget is the window that will contain everything we draw.
 root = tkinter.Tk()
-root.title("Flag of Mexico")
 root.geometry(str(width) + "x" + str(height))
+root.update_idletasks() # had to do this or root.winfo_width was 1...
+
+width = int(root.winfo_width() / 3.5) # get root width and scale it ( in pixels )
+title = title.rjust(width//2)
+root.title(title)
+
 
 #highlightthickness = 0 allows the canvas to occupy the entire root.
 canvas = tkinter.Canvas(root, highlightthickness = 0)
