@@ -8,6 +8,16 @@ import sys
 import PIL.ImageTk
 import urllib.request
 
+# inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
+url = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg"
+
+#check to see if the jpg file was there. If it wasn't, exit the script.
+try:
+    inputFile = urllib.request.urlopen(url)
+except urllib.error.URLError as error:
+    print("urllib.error.URLError", error)
+    sys.exit(1)
+
 baseUnit = 125
 height = baseUnit * 4
 width = baseUnit *7
@@ -16,9 +26,10 @@ title = "Flag of Mexico"
 #The root widget is the window that will contain everything we draw.
 root = tkinter.Tk()
 root.geometry(str(width) + "x" + str(height))
-root.update_idletasks() # had to do this or root.winfo_width was 1...
+# root.update_idletasks() # had to do this or root.winfo_width was 1...
 
-titleWidth = int(root.winfo_width() / 3.5) # get root width and scale it ( in pixels )
+# Center the title.
+titleWidth = int(width/3.5) # get root width and scale it ( in pixels )
 print_title = title.rjust(titleWidth//2)
 root.title(print_title)
 
@@ -30,21 +41,6 @@ canvas.create_rectangle(0, 0, width, height, width = 0, fill = "#FFFFFF")
 canvas.create_rectangle(0, 0, width/3, height, width = 0, fill = "#006847") #Color green
 canvas.create_rectangle((2 * width)/3, 0, width, height, width = 0, fill = "#CE1126") #Color red
 
-# try:
-# inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
-url = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg"
-try:
-    inputFile = urllib.request.urlopen(url)
-except urllib.error.URLError as error:
-    print("urllib.error.URLError", error)
-    sys.exit(1)
-except FileNotFoundError as error:
-    print(error)
-    sys.exit(1)
-except PermissionError as error:
-    print(error)
-    sys.exit(1)
-        
 myData = inputFile.read()
 myImage = PIL.ImageTk.PhotoImage(data = myData)
 
@@ -55,6 +51,7 @@ myImage = PIL.ImageTk.PhotoImage(data = myData)
 # myImage = PIL.ImageTk.PhotoImage(inputFile)
 
 inputFile.close()
+
 # Center the emblem on the flag on the flag
 canvas.create_image(width/2, height/2, image = myImage)
 
