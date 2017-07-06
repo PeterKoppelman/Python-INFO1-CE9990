@@ -11,11 +11,14 @@ import urllib.request
 # inputFile = PIL.Image.open('C:\\Users\\madan\\Downloads\\mexicocity.jpg')
 url = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg"
 
-#check to see if the jpg file was there. If it wasn't, exit the script.
+# Try with a non-existant url to make sure that the error trap works...
+# url = "https://githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/mexicocity.jpg"
+
+#check to see if the url was there. If it wasn't, exit the script.
 try:
     inputFile = urllib.request.urlopen(url)
 except urllib.error.URLError as error:
-    print("urllib.error.URLError", error)
+    print("The url", url, "does not exist")
     sys.exit(1)
 
 baseUnit = 125
