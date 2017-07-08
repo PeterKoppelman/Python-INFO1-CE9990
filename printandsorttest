@@ -1,0 +1,101 @@
+"""
+printandsorttest.py
+
+this script creates some different formating for the months list and uses some functions from the statistics library.
+It also shows that you can take a list of n dimensions that sort on any item in a list.
+
+
+"""
+
+import sys
+import statistics
+
+months = [
+    31,   #January
+    28,   #February
+    31,   #March
+    30,   #April
+    31,   #May
+    30,   #June
+    31,   #July
+    31,   #August
+    30,   #September
+    31,   #October
+    30,   #November
+    31    #December
+]
+
+
+print("\nThe values of months are",months,"\n")
+
+print("  Month      Days")
+print("Iteration  in Month")
+for i, month in enumerate(months, start = 0):
+    print("{:5} {:10}".format(i,month))
+
+print("\n\nSome attributes of months:")
+print("\tA year has", sum(months), "days.")
+print("\tThe shortest month has", min(months), "days")
+print("\tThe longest month has", max(months), "days")
+print("\tThe average month has", '{:2.4f}'.format(statistics.mean(months)), "days")
+print("\nSome statistics about months:")
+print("\tThe middle value of months is",'{:2.0f}'.format(statistics.median(months)))
+print("\tThe most common value of months is",'{:2.0f}'.format(statistics.mode(months)))
+print("\tThe standard deviation of months is", '{:2.4f}'.format(statistics.stdev(months)))
+print("\tThe variance of months is", '{:2.4f}'.format(statistics.variance(months)),"\n")
+
+print("Sort from smallest\n   to largest")
+months.sort()
+for month in months:
+    print("{:10}".format(month))
+
+print("Sort from largest\n   to smallest")
+months.sort(reverse = True)
+for month in months:
+    print("{:10}".format(month))
+
+
+
+# now lets try a list with pairs...
+
+months2 = [(1, "January"), (2, "February"), (3, "March"), (4, "April"), (5, "May"), (6, "June"), \
+           (7, "July"), (8, "August"), (9, "September"), (10, "October"), (11, "November"), (12, "December")]
+
+print("\nInitial ordering of the list pair month number and name of month")
+print (months2)
+
+months2.sort(key=lambda month: month[1]) # sort by the name of the month in the list months2
+
+print("\nOrdering as a lamda pair")
+print(months2)
+print("\nNow just print the months in the new order")
+for month in months2:
+    print(month[1])
+
+months2.sort(key=lambda month: len(month[1])) # sortest smallest month name first
+print("\nOrdering of lambda pair with the smallest month name first")
+print(months2)
+
+months2.sort(key=lambda month: len(month[1]), reverse= True) # longest month name first
+print("\nOrdering of lambda pair with the longest month name first")
+print(months2)
+
+
+# lest try a list with 3 items in each unit
+months3 = [(1, "January", 31), (2, "February", 28), (3, "March", 31), (4, "April", 30), \
+           (5, "May", 31), (6, "June", 30), (7, "July", 31), (8, "August", 31), \
+           (9, "September", 30), (10, "October", 31), (11, "November", 30), (12, "December", 31)]
+
+print("\n\nNow three units to each item in the list. The month number, the month name and the days in the month")
+print(months3)
+
+months3.sort(key=lambda month: month[2])
+print("\nSort by the number of days in the month")
+print(months3)
+
+print("\nNow just print the order of the months based on the new sort order")
+for month in months3:
+    print(month[2])
+
+# this shows that I can sort an item in a group in a list no matter how many dimensions.
+sys.exit(0)
