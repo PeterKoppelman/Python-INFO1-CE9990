@@ -1,0 +1,68 @@
+"""
+
+nestedloops.py
+
+this script uses nested loops adn a list of strings to output
+the lyrics to the song "The Twelve Days of Christmas"
+
+Peter Koppelman July 8, 2017
+"""
+
+import sys
+import time
+
+# lets look for the file.
+if sys.platform.startswith("darwin"):    #macOS Sierra 10.12.5
+    filename = "/Users/myname/Desktop/bond.txt"
+elif sys.platform.startswith("win32"):   #Microsoft Windows
+    filename = "C:\\Users\\madan\\Onthe1stdayofChristmas.txt"
+else:
+    print("Unknown platform", sys.platform)
+    sys.exit(1)
+
+# lets make sure that we found the file and have permission to open it.
+try:
+    infile = open(filename)
+except FileNotFoundError:
+    print("Sorry, could not find file \"", filename, "\".", sep = "")
+    sys.exit(1)
+except PermissionError:
+    print("Sorry, no permission to open file \"", filename, "\".", sep = "")
+    sys.exit(1)
+
+lines = infile.readlines() #lines is a list of strings
+infile.close()
+
+# lets print it out the correct way...
+for line in lines:
+    print(line, end = "")
+
+# now lets sort the lines
+lines.sort()
+
+# create a list with only one instance of each item in the original list. This is a 2 dimensional list.
+uniqueline = []
+
+for line in lines:
+    # count the number of times that the line appears in the song
+    i = lines.count(line) 
+    # strip out the newline that appears. If we don't do this the print statement doesn't work properly.
+    name = line.strip("\n,''")
+    # don't put the blank line between paragraphs in the song in uniqueline.
+    if name != "": 
+        # check to see if the combination of the line in the song and the number of times it has appeared is in uniqueline.
+        if [name, i] not in uniqueline: 
+            uniqueline.append([name, i])
+            
+
+print("A list of unique phrases and the amount of times they appear in the song:")
+for line in uniqueline:
+     print("\tThe phrase", line[0], "appears", line[1] ,"times.")
+
+uniqueline.sort(key = lambda line:line[1], reverse = True)
+print("\n\nA list of unique phrases sorted by the order that they appear in the song:")
+for line in uniqueline:
+     print("\tThe phrase", line[0], "appears", line[1] ,"times.")
+
+
+sys.exit(0)
