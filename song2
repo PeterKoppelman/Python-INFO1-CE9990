@@ -45,7 +45,7 @@ for line in lines:
     s = line.decode("utf-8")
     # strip out the newline that appears and replace is with '' (no space).
     # If we don't do this the print statement doesn't work properly.
-    name = s.strip("\n,''")
+    name = s.strip("\n")
     # don't put the blank line between paragraphs in the song in uniqueline.
     if name != "":
         # check to see if the combination of the line in the song and the number of times it has appeared is in uniqueline.
