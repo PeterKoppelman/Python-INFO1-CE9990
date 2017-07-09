@@ -45,6 +45,7 @@ for line in lines:
     s = line.decode("utf-8")
     # strip out the newline that appears and replace is with '' (no space).
     # If we don't do this the print statement doesn't work properly.
+    # name = s.strip("\n,''")
     name = s.strip("\n")
     # don't put the blank line between paragraphs in the song in uniqueline.
     if name != "":
@@ -53,14 +54,15 @@ for line in lines:
             uniqueline.append([name, i])
             
 
-print("A list of unique phrases and the amount of times they appear in the song:")
+print("A list of unique phrases and the amount of times they appear in the song (sorted by phrase):")
 for line in uniqueline:
-     print("\tThe phrase", line[0], "appears", line[1] ,"times.")
-
+     # print("\tThe phrase", line[0], "appears", line[1] ,"times.")
+     print("\t", line[0], "appears", line[1] ,"times.")
+     
 uniqueline.sort(key = lambda line:line[1], reverse = True)
-print("\n\nA list of unique phrases sorted by the order that they appear in the song (reverse sort):")
+print("\n\nA list of unique phrases sorted by the number of times that they appear in the song:")
 for line in uniqueline:
-     print("\tThe phrase", line[0], "appears", line[1] ,"times.")
+     print("\t", line[0], "appears", line[1] ,"times.")
 
 
 sys.exit(0)
