@@ -1,0 +1,82 @@
+"""
+
+testcodespeed.py
+
+this script tests the speed of decode statement and pythons ability to loop around large files
+The song "The Twelve Days of Christmas" has been replicated 90 times to create an input
+file of approximately 10,250 line.
+
+Peter Koppelman July 11, 2017
+"""
+
+import sys
+import time
+import urllib.request
+
+# read the url 
+url = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/christmastest"
+
+# check to make sure that we can open the url
+try:
+    filename = urllib.request.urlopen(url) # we were successful
+except urllib.error.URLError as error: 
+    print("The url", url, "does not exist") # we weren't successful
+    sys.exit(1)
+
+# read the filename
+# You can multiply the file by a number to increase it's size.
+# lines = filename.readlines() * 5
+lines = filename.readlines()
+
+# use decode to onverts a sequence of bytes into a string of characters.
+start = time.time()
+count = 0
+
+for line in lines:
+    s = line.decode("utf-8")
+    count += 1
+    # print(s, end = "")
+    # print(line.decode("utf-8"), end = "") # the decode statement can be embedded in the print command.
+    #i += 1
+end = time.time()
+print("Number of lines in file is {:,.0f}".format(count))
+print("Elapsed time for initial deocde statement is {:.4f} seconds".format(end - start))
+
+# Execution time seems to be close to 0, it seems that the "time" that it takes to run the program is in the print statement.
+# printing to the screen is what slows this down...
+
+# now let's sort the lines
+lines.sort()
+
+# create a list with only one instance of each item in the original list. This is a 2 dimensional list.
+uniqueline = []
+start = time.time()
+for line in lines:
+    # use decode to onverts a sequence of bytes into a string of characters. 
+    s = line.decode("utf-8")
+    # strip out the newline that appears and replace is with '' (no space).
+    # If we don't do this the print statement doesn't work properly.
+    name = s.strip()
+    # don't put the blank line between paragraphs in the song in uniqueline.
+    if name != "":
+        # count the number of times that the line appears in the song
+        i = lines.count(line)
+        # check to see if the combination of the line in the song and the number of times it has appeared is in uniqueline.
+        if [name, i] not in uniqueline: 
+            uniqueline.append([name, i])
+            
+end = time.time()
+print("Elapsed time to create a unique file to print out is {:.4f} seconds".format(end - start))
+
+print("\n\nA list of unique phrases and the amount of times they appear in the song (sorted by phrase):")
+for line in uniqueline:
+     # Improved formating for numbers over 999.
+     print("\t","{:} appears {:,.0f} times".format(line[0], line[1]))
+     
+uniqueline.sort(key = lambda line:line[1], reverse = True)
+print("\n\nA list of unique phrases sorted by the number of times that they appear in the song:")
+for line in uniqueline:
+     print("\t","{:} appears {:,.0f} times".format(line[0], line[1]))
+
+
+sys.exit(0)
