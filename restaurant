@@ -1,0 +1,56 @@
+
+"""
+restaurant2.py
+
+Output the inspection results for Wo Hop, 17 Mott Street, NY, NY 10013
+"""
+
+import sys
+import csv   #Comma-separated values.  Do not name this Python script csv.py.
+import urllib.request
+
+
+url = "https://data.cityofnewyork.us/api/views/xx67-kt59/rows.csv" \
+    "?accessType=DOWNLOAD"
+
+try:
+    lines = urllib.request.urlopen(url)
+except urllib.error.URLError as error:
+    print("urllib.error.URLError", error)
+    sys.exit(1)
+
+hopLines = []                   #Start with an empty list.
+
+for line in lines:
+    try:
+        s = line.decode("utf-8")    #s is a string
+    except UnicodeError as unicodeError:
+        print(unicodeError)
+        sys.exit(1)
+
+    r = csv.reader([s])         #[s] is a list containing one string
+    fields = next(r)            #fields is a list of strings
+    if fields[0] == "41320866": #CAMIS number for Wo Hop
+        hopLines.append(fields)
+
+lines.close()
+
+def score(line):
+    """
+    Return the line's datestamp, but with the format changed from "12/31/2017"
+    to "2017/12/31".  That makes alphabetical order the same as chronological
+    order.
+    """
+    fields = line[8].split("/")
+    return fields[2] + "/" + fields[0] + "/" + fields[1]
+
+hopLines.sort(key = score)
+
+for line in hopLines:
+    print(line[1], line[8]) #name and inspection date
+    # print(line[11])         #violation description
+    listOfInts = [ord(c) for c in line[11]]                #list comprehension
+    sequenceOfBytes = bytes(listOfInts)
+    stringOfCharacters = sequenceOfBytes.decode("utf-8")   #error checking omitted for brevity
+    print(stringOfCharacters)
+    print()
