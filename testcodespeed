@@ -27,19 +27,14 @@ except urllib.error.URLError as error:
 # You can multiply the file by a number to increase it's size.
 # lines = filename.readlines() * 5
 lines = christmasSong.readlines()
-
+count = sum(1 for line in lines)
 # Close christmasSong
 christmasSong.close()
 
 start = time.process_time()
-count = 0
 
 # use decode to onverts a sequence of bytes into a string of characters.
-for line in lines:
-    s = line.decode("utf-8")
-    count += 1
-    # print(s, end = "")
-    # print(line.decode("utf-8"), end = "") # the decode statement can be embedded in the print command.
+lines = [line.decode("utf-8") for line in lines]
     
 end = time.process_time()
 print("Number of lines in file is {:,.0f}".format(count))
@@ -52,11 +47,9 @@ lines.sort()
 uniqueline = []
 start = time.process_time()
 for line in lines:
-    # use decode to onverts a sequence of bytes into a string of characters. 
-    s = line.decode("utf-8")
     # strip out the newline that appears and replace is with '' (no space).
     # If we don't do this the print statement doesn't work properly.
-    name = s.strip()
+    name = line.strip()
     # don't put the blank line between paragraphs in the song in uniqueline.
     if name != "":
         # count the number of times that the line appears in the song
