@@ -19,15 +19,13 @@ from operator import itemgetter
 oldfile = "C:\\users\\madan\\DOHMH_New_York_City_Restaurant_Inspection_Results.csv"
 
 try:
-    infile = open(oldfile, encoding = "utf-8", newline = "")
+    infile = csv.reader(open(oldfile, encoding = "utf-8", newline = ""))
 except FileNotFoundError:
     print("Sorry, could not find file \"", oldfile, "\".", sep = "")
     sys.exit(1)
 except PermissionError:
     print("Sorry, no permission to open file \"", oldfile, "\".", sep = "")
     sys.exit(1)
-
-# lines = infile.readlines()
 
 # the following code changes a comma delimiter in the original csv file to a tilda in the new file.
 # Can this be done on the entire file at one time instead of line by line?
@@ -37,34 +35,45 @@ except PermissionError:
 #             new_line = line.replace(",","~")
 #            t.write(new_line)
 
+# outfile = open("C:\\users\\madan\\temp.csv", "wb")
+# writer = csv.writer(outfile, delimiter='~', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-# use csv.reader to open the original csv file and sort it by the first field in each line.
-data = csv.reader(open(oldfile),delimiter=',')
-newfile = sorted(data, key=itemgetter(0, 8))
-# newfile = sorted(data, key = lambda x: x[0], x[8])
+# for row in infile:
+#     writer.writerow(row)
+    
+# outfile.close()
+
+# Sort infile by fields 0 and 8 (CAMIS and date) so that the reviews of each
+# establishment are sorted in order of the earliest first
+newfile = sorted(infile, key = itemgetter(0, 8))
+# newfile = sorted(infile, key = lambda x: x[0], x[8])
 
 # print some key items for the first few records in the new file.
 i = 0
-camis = " "
+camis = None
 for line in newfile:
     if i < 50: # stop after record 50. This is arbitrary.
         if camis != line[0]:
             # print "header information"
-            print ("\n\n",line[0]," ", line [1]," ",line[3]," ",line [4]," ",line [2]," ",line [5], sep="") 
+            print()
+            print()
+            print(line[0]," ", line[1]," ",line[3]," ",line [4]," ",line [2]," ",line [5], sep="") 
             camis = line[0]
+            
         # print detailed information (date and write-up)
+        print("\t", line[8], sep = "", end = " ")
         temp = line[11]
-        if len(line[11]) < 130:
-            print("\t",line[8],line[11])
-        elif len(line[11]) < 260:
-            print("\t", line[8], temp[:130])
-            print("\t", temp[130:])
-        else:
-            print("\t", line[8], temp[:130])
-            print("\t", temp[130:260])
-            print("\t", temp[260:])
+
+        j = 0
+        x = " " # this is a blank space so that wrapping around in the print statement looks better
+        while len(temp) > 0:
+            if j == 0:
+                print(temp[:130])
+            else:
+                print("\t", x * 11, temp[:130], sep = "")
+            temp = temp[130:]
+            j += 1
         
-        # print("\t",line[8],line[11])
         i += 1
 
 sys.exit(0)
