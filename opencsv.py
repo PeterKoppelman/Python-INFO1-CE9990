@@ -2,19 +2,14 @@
 
 opencsv.py
 
-This code test the csv reader to see if you can use a delimiter other than
-a comma.
+This code test the csv reader and csv writer to see if you can use a delimiter
+other than a comma.
 
-It also uses a sorted function with and without a lambda.
-It does some nice printing to...
-
-Peter Koppelman July 16, 2017
+Peter Koppelman July 19, 2017
 """
 
 import sys
 import csv
-import copy
-from operator import itemgetter
 
 oldfile = "C:\\users\\madan\\DOHMH_New_York_City_Restaurant_Inspection_Results.csv"
 
@@ -27,53 +22,14 @@ except PermissionError:
     print("Sorry, no permission to open file \"", oldfile, "\".", sep = "")
     sys.exit(1)
 
-# the following code changes a comma delimiter in the original csv file to a tilda in the new file.
-# Can this be done on the entire file at one time instead of line by line?
-# with open(oldfile, 'r') as f:
-#     with open("C:\\users\\madan\\temp.csv", 'w') as t:
-#         for line in f:
-#             new_line = line.replace(",","~")
-#            t.write(new_line)
+# the following code uses csv.writer to create a csv file with a tilda (~) as
+# a delimiter.
+outfile = open("C:\\users\\madan\\temp.csv", "w")
+writer = csv.writer(outfile, delimiter='~', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 
-# outfile = open("C:\\users\\madan\\temp.csv", "wb")
-# writer = csv.writer(outfile, delimiter='~', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+for row in infile:
+    writer.writerow(row)
 
-# for row in infile:
-#     writer.writerow(row)
-    
-# outfile.close()
-
-# Sort infile by fields 0 and 8 (CAMIS and date) so that the reviews of each
-# establishment are sorted in order of the earliest first
-newfile = sorted(infile, key = itemgetter(0, 8))
-# newfile = sorted(infile, key = lambda x: x[0], x[8])
-
-# print some key items for the first few records in the new file.
-i = 0
-camis = None
-for line in newfile:
-    if i < 50: # stop after record 50. This is arbitrary.
-        if camis != line[0]:
-            # print "header information"
-            print()
-            print()
-            print(line[0]," ", line[1]," ",line[3]," ",line [4]," ",line [2]," ",line [5], sep="") 
-            camis = line[0]
-            
-        # print detailed information (date and write-up)
-        print("\t", line[8], sep = "", end = " ")
-        temp = line[11]
-
-        j = 0
-        x = " " # this is a blank space so that wrapping around in the print statement looks better
-        while len(temp) > 0:
-            if j == 0:
-                print(temp[:130])
-            else:
-                print("\t", x * 11, temp[:130], sep = "")
-            temp = temp[130:]
-            j += 1
-        
-        i += 1
+outfile.close()
 
 sys.exit(0)
