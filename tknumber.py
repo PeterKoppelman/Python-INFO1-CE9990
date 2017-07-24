@@ -69,15 +69,8 @@ def buttonPress():   #Called when the button is pressed.
     # Lname is the index number of the language. I.e. English = 0, Spanish = 1, etc.
     Lname = int(languageNames.index(LanguageName.get()))
     
-    print("Number =", Number)
-    print("Lname = ", Lname + 1)
-    # word = print(str(numbers[Number][Lname + 1]))
-    word = print(numbers[Number][Lname + 1])
-    # print(len(word))
-
-    # sys.exit(0)
-    # answerText.insert("1.0", word)
-    answerText.insert("1.0", str(word))
+    word = str(numbers[Number][Lname + 1])
+    answerText.insert("1.0", word)
 
 
 root = tkinter.Tk()
