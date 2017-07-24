@@ -3,7 +3,7 @@ tknumber.py
 
 Input a number between 1 and 10 and choose a language
 (English, Spanish, French and Italian) and the spelling of the
-word for the number in that language will appear.
+word for the number will appear.
 
 Peter Koppelman July 22, 2017
 
@@ -13,38 +13,25 @@ import sys
 import tkinter
 
 #List of numbers with their corresponding names in four different languages
+numbers = (
+    (None),
+    ("one", "unos", "un", "uno"), #1
+    ("two", "dos", "deux", "due"), #2
+    ("three", "tres", "trois", "tre"), #3
+    ("four", "cuatro", "quatre", "quatro"), #4
+    ("five", "cinco", "cinq", "cinque"), #5
+    ("six", "seis", "six", "sei"), #6
+    ("seven", "siete", "sept", "sette"), #7
+    ("eight", "ocho", "huit", "otto"), #8
+    ("nine", "nueve", "neuf", "nove"), #9
+    ("ten", "diez", "dix", "dieci"), #10
+     )
 
-# numbers = [
-#     ["0", []],
-#     ["1", ["one", "unos", "un", "uno"]],
-#     ["2", ["two", "dos", "deux", "due"]],
-#     ["3", ["three", "tres", "trois", "tre"]],
-#     ["4", ["four", "cuatro", "quatre", "quatro"]],
-#     ["5", ["five", "cinco", "cinq", "cinque"]],
-#     ["6", ["six", "seis", "six", "sei"]],
-#     ["7", ["seven", "siete", "sept", "sette"]],
-#     ["8", ["eight", "ocho", "huit", "otto"]],
-#     ["9", ["nine", "nueve", "neuf", "nove"]],
-#     ["10", ["ten", "diez", "dix", "dieci"]],
-#      ]
-
-numbers = [
-    ["0", " ", " ", " ", " "],
-    ["1", "one", "unos", "un", "uno"],
-    ["2", "two", "dos", "deux", "due"],
-    ["3", "three", "tres", "trois", "tre"],
-    ["4", "four", "cuatro", "quatre", "quatro"],
-    ["5", "five", "cinco", "cinq", "cinque"],
-    ["6", "six", "seis", "six", "sei"],
-    ["7", "seven", "siete", "sept", "sette"],
-    ["8", "eight", "ocho", "huit", "otto"],
-    ["9", "nine", "nueve", "neuf", "nove"],
-    ["10", "ten", "diez", "dix", "dieci"],
-     ]
+# list of languages for the pull down menu
 Languages = ("English", "Spanish", "French", "Italian")
 
-
-def buttonPress():   #Called when the button is pressed.
+#Called when the button is pressed.
+def buttonPress():
     """
     Get the number and the language,
     and display the corresponding word in the Text widget.
@@ -64,12 +51,16 @@ def buttonPress():   #Called when the button is pressed.
     if Number < 1 or Number > 10:
         answerText.insert("1.0", "Number must be between 1 and 10.")
         return
-
     
-    # Lname is the index number of the language. I.e. English = 0, Spanish = 1, etc.
-    Lname = int(languageNames.index(LanguageName.get()))
-    
-    word = str(numbers[Number][Lname + 1])
+    # Lnumber is the index number of the language. i.e. English = 0,
+    # Spanish = 1, etc.
+    try:
+        Lnumber = Languages.index(LanguageName.get())
+    except ValueError:
+        answerText.insert("1.0", LanguageName.get() + " is not a valid language")
+        return
+   
+    word = numbers[Number][Lnumber]
     answerText.insert("1.0", word)
 
 
@@ -88,14 +79,9 @@ numberLabel.grid(row = 0, column = 1)
 numberEntry = tkinter.Entry(root, width = 8)
 numberEntry.grid(row = 1, column = 0)
 
-#Make a list of the names of the languages.
-languageNames = []   #Start with an empty list.
-for language in Languages:
-    languageNames.append(language)
-
 LanguageName = tkinter.StringVar(root)
 LanguageName.set(Languages[0])          #Menu displays this default choice.
-LanguageMenu = tkinter.OptionMenu(root, LanguageName, *languageNames)
+LanguageMenu = tkinter.OptionMenu(root, LanguageName, *Languages)
 LanguageMenu.grid(row = 1, column = 1)
 
 button = tkinter.Button(root, text = "Go", command = buttonPress)
