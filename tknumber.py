@@ -3,7 +3,7 @@ tknumber.py
 
 Input a number between 1 and 10 and choose a language
 (English, Spanish, French and Italian) and the spelling of the
-word for the number will appear.
+word for the number in that language will appear.
 
 Peter Koppelman July 22, 2017
 
