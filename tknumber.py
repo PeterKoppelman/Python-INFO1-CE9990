@@ -24,7 +24,7 @@ numbers = (
     ("seven", "siete", "sept", "sette"), #7
     ("eight", "ocho", "huit", "otto"), #8
     ("nine", "nueve", "neuf", "nove"), #9
-    ("ten", "diez", "dix", "dieci"), #10
+    ("ten", "diez", "dix", "dieci") #10
      )
 
 # list of languages for the pull down menu
