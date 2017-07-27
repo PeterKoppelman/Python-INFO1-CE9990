@@ -14,7 +14,7 @@ import tkinter
 
 #List of numbers with their corresponding names in four different languages
 numbers = (
-    (None),
+    None,
     ("one", "unos", "un", "uno"), #1
     ("two", "dos", "deux", "due"), #2
     ("three", "tres", "trois", "tre"), #3
@@ -48,7 +48,7 @@ def buttonPress():
         answerText.insert("1.0", numberEntry.get() + " is not an integer")
         return
 
-    if Number < 1 or Number > 10:
+    if Number < 1 or Number >= len(numbers):
         answerText.insert("1.0", "Number must be between 1 and 10.")
         return
     
