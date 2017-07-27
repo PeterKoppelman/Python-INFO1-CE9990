@@ -9,7 +9,7 @@ stop the iteration as soon as it finds a match.
 import sys
 
 # try this making notes a tuple
-notes = [
+notes = (
     ("do", "deer, a female deer"),
     ("re", "drop of golden sun"),
     ("me", "name I call myself"),
@@ -17,7 +17,7 @@ notes = [
     ("so", "needle pulling thread"),
     ("la", "note to follow so"),
     ("ti", "drink with jam and bread")
-]
+)
 
 while True:
     try:
@@ -26,10 +26,12 @@ while True:
         sys.exit(0)
 
     try:
-        verbiage = next(x for x in notes if x[0] == note)[1]
+        verbiage = [x for x in notes if x[0] == note][0][1]
+        # verbiage = next(x for x in notes if x[0] == note)[1]
         print(note.capitalize(), ", a ", verbiage, ".", sep = "")
                 
-    except StopIteration:
+    # except StopIteration:
+    except IndexError:
         print("Sorry, \"", note, "\" is not a note.", sep = "")
         print()
         continue   #Go back up to the word "while".
