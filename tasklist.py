@@ -6,22 +6,19 @@ Print one copy the name of each running process, in alphabetical order.
 
 import sys
 import os
+import csv
 
-infile = os.popen("tasklist")   #Create a child process and a pipe
+#Create a child process and a pipe as a csv file
+infile = os.popen("tasklist /FO csv")   
 lines = infile.readlines()      #lines is a list of lines.
-status = infile.close()
 
-if status != None:              #status is supposed to be None.
-    print("\"tasklist\" produced exit status", status)
-    sys.exit(1)
+lines = [line.split(",") for line in lines]
+lines = sorted(set([line[0] for line in lines]))
 
-lines = sorted(set(lines[3:]))
-lines = [line.rstrip() for line in lines]       #Remove trailing newline.
-
-print("    Image Name                     PID Session Name        Session#    Mem Usage")
-print("    =========================   ====== ============        ========   ==========")
-
+print("           Image Name")
+print("    =========================")
+      
 for i, line in enumerate(lines, start = 1):
-    print("{:3} {}".format(i, line))
+    print("{:3} {}".format(i, line[1:-1])) # [1:-1] strips out the quotes
 
 sys.exit(0)
