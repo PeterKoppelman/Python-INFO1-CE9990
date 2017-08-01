@@ -42,12 +42,23 @@ except PermissionError:
 dowjones = csv.reader((dowjonescsv), delimiter=';')
 nasdaq100 = csv.reader(nasdaq100csv)
 
+
+# create a few file because the first line of the Nasdaq file contains
+# one line of header information.
+nasdaqNew = []
+for row in nasdaq100:
+    next(nasdaq100)
+    for row in nasdaq100:
+        nasdaqNew.append(row)
+
+
 # Turn the files into sets.
-# strip out any blanks and make the name of the company upper case for
+# Strip out any blanks and make the name of the company upper case for
 # comparison later in the script.
 dowjones = set([line[1].strip().upper() for line in dowjones])
-nasdaq100 = set([line[1].strip().upper() for line in nasdaq100])
+nasdaq100 = set([line[1].strip().upper() for line in nasdaqNew])
 
+        
 # create three files with companies in both indexes (intersection)
 # companies just in the Dow Jones (dowjonesonly) and companies that
 # are just in the Nasdaq 100.
