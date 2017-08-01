@@ -1,0 +1,108 @@
+Symbol, Name, lastsale, netchange,pctchange, share_volume, Nasdaq100_points
+ATVI, Activision Blizzard Inc,61.45,0.28,0.46,4285663,0.2
+ADBE, Adobe Systems Incorporated,146.73,0.53,0.36,1399373,0.2
+AKAM, Akamai Technologies Inc.,46.89,0.88,1.91,2993447,0.1
+ALXN, Alexion Pharmaceuticals Inc.,137.99,4.07,3.04,2475082,0.8
+GOOG, Alphabet Inc.,941.53,7.44,0.8,1846351,2.3
+GOOGL, Alphabet Inc.,958.33,5.82,0.61,1813794,1.5
+AMZN, Amazon.com Inc.,1020.04,-25.96,-2.48,7709420,-10.8
+AAL, American Airlines Group Inc.,50.49,0.49,0.98,9153445,0.2
+AMGN, Amgen Inc.,174.54,2.39,1.39,2463475,1.5
+ADI, Analog Devices Inc.,79.24,-0.31,-0.39,1677677,-0.1
+AAPL, Apple Inc.,149.5,-1.06,-0.7,17213653,-4.8
+AMAT, Applied Materials Inc.,45.25,-0.79,-1.72,9584336,-0.7
+ADSK, Autodesk Inc.,111.5,-0.02,-0.02,946232,0
+ADP, Automatic Data Processing Inc.,117.38,1.75,1.51,7880377,0.7
+BIDU, Baidu Inc.,220,19,9.45,12591474,4.6
+BIIB, Biogen Inc.,287.44,-0.51,-0.18,869157,-0.1
+BMRN, BioMarin Pharmaceutical Inc.,88.34,1.02,1.17,731583,0.2
+AVGO, Broadcom Limited,250.37,-0.58,-0.23,3191860,-0.2
+CA, CA Inc.,30.94,-0.16,-0.51,5188339,-0.1
+CELG, Celgene Corporation,134.1,-0.05,-0.04,3794219,0
+CERN, Cerner Corporation,64.6,1.08,1.7,2793112,0.3
+CHTR, Charter Communications Inc.,370.26,3.36,0.92,1600282,0.8
+CHKP, Check Point Software Technologies Ltd.,106.57,0.15,0.14,669254,0
+CTAS, Cintas Corporation,135.61,-0.21,-0.15,570165,0
+CSCO, Cisco Systems Inc.,31.52,-0.05,-0.16,15770955,-0.2
+CTXS, Citrix Systems Inc.,79.71,-0.03,-0.04,854739,0
+CTSH, Cognizant Technology Solutions Corporation,69.32,-0.4,-0.57,3926121,-0.2
+CMCSA, Comcast Corporation,39.52,0.09,0.23,20378111,0.4
+COST, Costco Wholesale Corporation,152.89,0.37,0.24,2779452,0.1
+CSX, CSX Corporation,49.99,-0.01,-0.02,9918394,0
+CTRP, Ctrip.com International Ltd.,59.71,0.86,1.46,3183279,0.3
+XRAY, DENTSPLY SIRONA Inc.,62.65,-0.26,-0.41,1033082,-0.1
+DISCA, Discovery Communications Inc.,26.8,0.41,1.55,6784543,0.1
+DISCK, Discovery Communications Inc.,25.5,0.36,1.43,4536761,0.1
+DISH, DISH Network Corporation,63.94,0.06,0.09,1160470,0
+DLTR, Dollar Tree Inc.,71.8,-0.44,-0.61,1750915,-0.1
+EBAY, eBay Inc.,35.94,-0.23,-0.64,7654583,-0.2
+EA, Electronic Arts Inc.,118.25,0.65,0.55,5012269,0.2
+EXPE, Expedia Inc.,159.5,5.25,3.4,4398933,0.6
+ESRX, Express Scripts Holding Company,62.9,0.57,0.91,3038852,0.3
+FB, Facebook Inc.,172.45,2.01,1.18,24557553,4.2
+FAST, Fastenal Company,43.55,-0.25,-0.57,3129938,-0.1
+FISV, Fiserv Inc.,126.23,-0.74,-0.58,461649,-0.1
+GILD, Gilead Sciences Inc.,75.94,0.98,1.31,8954646,1.1
+HAS, Hasbro Inc.,105.74,-0.33,-0.31,1305443,0
+HSIC, Henry Schein Inc.,182.91,0.08,0.04,319018,0
+HOLX, Hologic Inc.,44.12,-0.32,-0.72,2689152,-0.1
+IDXX, IDEXX Laboratories Inc.,167.52,3.12,1.9,482309,0.2
+ILMN, Illumina Inc.,174.92,0.59,0.34,626882,0.1
+INCY, Incyte Corporation,135.74,3.02,2.28,989763,0.5
+INTC, Intel Corporation,35.31,0.34,0.97,36291484,1.4
+INTU, Intuit Inc.,135.64,-1.23,-0.9,979628,-0.3
+ISRG, Intuitive Surgical Inc.,941.2,9.35,1,487001,0.3
+JBHT, J.B. Hunt Transport Services Inc.,90.37,-0.48,-0.53,712873,-0.1
+JD, JD.com Inc.,45.22,0.06,0.13,8919292,0.1
+KLAC, KLA-Tencor Corporation,94.4,-5.53,-5.53,1864670,-0.8
+LRCX, Lam Research Corporation,161.6,-3.16,-1.92,2740045,-0.4
+LBTYA, Liberty Global plc,33.59,0.34,1.02,1342191,0.1
+LBTYK, Liberty Global plc,32.62,0.4,1.24,2352768,0.2
+LILA, Liberty Global plc,25.53,0.27,1.07,199756,0
+LILAK, Liberty Global plc,25.49,0.02,0.08,433746,0
+LVNTA, Liberty Interactive Corporation,57.84,0.42,0.73,323669,0
+QVCA, Liberty Interactive Corporation,24.23,-0.08,-0.33,2086066,0
+MAR, Marriott International,103.34,-0.72,-0.69,2005157,-0.2
+MAT, Mattel Inc.,19.635,-1.665,-7.82,22877277,-0.5
+MXIM, Maxim Integrated Products Inc.,45.47,-0.11,-0.24,1984491,0
+MELI, MercadoLibre Inc.,288.87,2.23,0.78,742296,0.1
+MCHP, Microchip Technology Incorporated,80.7,-0.23,-0.28,1252166,-0.1
+MU, Micron Technology Inc.,29.28,-0.96,-3.17,31854933,-0.9
+MSFT, Microsoft Corporation,73.04,-0.12,-0.16,18306680,-0.8
+MDLZ, Mondelez International Inc.,43.93,-0.31,-0.7,6700587,-0.4
+MNST, Monster Beverage Corporation,53.41,-0.62,-1.15,1244070,-0.3
+MYL, Mylan N.V.,38.74,0.25,0.65,2304230,0.1
+NTES, NetEase Inc.,313.79,3.65,1.18,768446,0.2
+NFLX, Netflix Inc.,184.04,1.36,0.74,6201947,0.5
+NCLH, Norwegian Cruise Line Holdings Ltd.,55.21,0.1,0.18,984902,0
+NVDA, NVIDIA Corporation,164.39,2.65,1.64,12833737,1.4
+ORLY, O'Reilly Automotive Inc.,200.03,-1.28,-0.64,1452730,-0.1
+PCAR, PACCAR Inc.,68.18,0.02,0.03,1377993,0
+PAYX, Paychex Inc.,57.76,-1.88,-3.15,4069135,-0.6
+PYPL, PayPal Holdings Inc.,59.2,-0.95,-1.58,10800785,-1
+QCOM, QUALCOMM Incorporated,52.88,0.39,0.74,6644302,0.5
+REGN, Regeneron Pharmaceuticals Inc.,508.71,0.3,0.06,620107,0
+ROST, Ross Stores Inc.,54.87,-0.25,-0.45,2102600,-0.1
+STX, Seagate Technology PLC,32.61,0.05,0.15,7865473,0
+SHPG, Shire plc,168.29,-1.07,-0.63,945940,-0.1
+SIRI, Sirius XM Holdings Inc.,5.81,-0.02,-0.34,20817984,-0.1
+SWKS, Skyworks Solutions Inc.,105.76,-1.24,-1.16,1604629,-0.2
+SBUX, Starbucks Corporation,54,-5.5,-9.24,53454789,-7
+SYMC, Symantec Corporation,31.03,0.09,0.29,3742288,0.1
+TMUS, T-Mobile US Inc.,61.78,0.16,0.26,2809930,0.1
+TSLA, Tesla Inc.,335.07,0.61,0.18,4880414,0.1
+TXN, Texas Instruments Incorporated,80.71,-0.26,-0.32,5228009,-0.2
+KHC, The Kraft Heinz Company,87.64,-0.55,-0.62,1902723,-0.6
+PCLN, The Priceline Group Inc.,2024.06,-1.03,-0.05,505472,0
+TSCO, Tractor Supply Company,56.62,-0.91,-1.58,3377273,-0.1
+FOX, Twenty-First Century Fox Inc.,28.91,-0.31,-1.06,3994434,-0.2
+FOXA, Twenty-First Century Fox Inc.,29.37,-0.26,-0.88,9035353,-0.2
+ULTA, Ulta Beauty Inc.,248.6,-0.83,-0.33,669831,-0.1
+VRSK, Verisk Analytics Inc.,87.32,0.17,0.2,510354,0
+VRTX, Vertex Pharmaceuticals Incorporated,154.15,-2.04,-1.31,1880425,-0.4
+VIAB, Viacom Inc.,35.66,0.15,0.42,3377979,0.1
+VOD, Vodafone Group Plc,29.44,-0.08,-0.27,2316095,0
+WBA, Walgreens Boots Alliance Inc.,79.62,0.84,1.07,5250468,0.8
+WDC, Western Digital Corporation,84.97,-6.93,-7.54,11204406,-1.8
+WYNN, Wynn Resorts Limited,128.6,0.58,0.45,2730547,0.1
+XLNX, Xilinx Inc.,63.67,-0.17,-0.27,2166300,0
