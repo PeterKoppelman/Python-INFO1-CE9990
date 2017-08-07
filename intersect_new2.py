@@ -8,40 +8,51 @@ Create a dictionary with the ticker symbols as the key and the name of the compa
 value. Then crate two sets, one with the call symbols of hte DJIA and one with the
 call symbols of the Nasdaq 100.
 
-Peter Koppelman August 2, 2017
+Peter Koppelman August 6, 2017
 """
 
 import sys
 import itertools
 import csv
 import urllib.request
-import codecs
+import io
 
-# Read in the two files from the harddrive
-# filename1 = "C:\\Users\\madan\\Downloads\\DowJones30.csv"
-# filename2 = "C:\\Users\\madan\\Downloads\\nasdaq100list.csv"
+# This function opens the files from the web.
+def openfile(filename, outfile):
+    try:
+        newfile = urllib.request.urlopen(filename)
+        s = newfile.read()
+        try:
+            s = s.decode("utf-8")
+        except UnicodeError as unicodeError:
+            print(unicodeError)
+            sys.exit(1)
+        outfile += io.StringIO(s)
+    except urllib.error.URLError as error:
+        print("urllib.error.URLError", error)
+        sys.exit(1)
 
+# This function skips the header in a csv file.
+def skipheader(filename, outfile, headerlines):
+    try:
+        next(filename) * headerlines
+        for row in filename:
+            outfile.append(row)
+    except StopIteration:
+        pass
 
-url1 = "https://github.com/PeterKoppelman/Python-INFO1-CE9990/blob/master/dowjones30.csv"
-try:
-    dowjonescsv = urllib.request.urlopen(url1)
-    # turns bytes to list.
-    dowjonescsv = csv.reader(dowjonescsv.read().decode('utf-8'))
-    # turns bytes to list
-    # dowjonescsv = csv.reader(codecs.iterdecode(dowjonescsv, 'utf-8'))
-except urllib.error.URLError as error:
-    print("urllib.error.URLError", error)
-    sys.exit(1)
+# def uniquelist(input, output):
+#     for row in input:
+#         output.append(Reference.get(row).title())
 
+# Get the file names from the web and call openfile function.
+url1 = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/dowjones30.csv"
+dowjonescsv = []
+openfile(url1, dowjonescsv)
 
-url2 = "https://github.com/PeterKoppelman/Python-INFO1-CE9990/blob/master/nasdaq100list.csv"
-try:
-    nasdaq100csv = urllib.request.urlopen(url2)
-    # nasdaq100csv = csv.reader(nasdaq100csv.read().decode('utf-8'))
-    # nasdaq100csv = csv.reader(codecs.iterdecode(nasdaq100csv, 'utf-8'))
-except urllib.error.URLError as error:
-    print("urllib.error.URLError", error)
-    sys.exit(1)
+url2 = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/nasdaq100list.csv"
+nasdaq100csv = []
+openfile(url2, nasdaq100csv)
     
 # Create a reference dictionary from the symbol and name fields in each file
 # This is dictionary comprehension.
@@ -55,28 +66,19 @@ Reference.update(RefNasdaq)
 Reference.update(RefDow)
 
 # Re-open the files. For some reason they were closed.
-dowjonescsv = open(filename1, encoding = "utf-8", newline = "")
+dowjonescsv = []
+openfile(url1, dowjonescsv)
 dowjones = csv.reader(dowjonescsv, delimiter=';')
-nasdaq100csv = open(filename2, encoding = "utf-8", newline = "")
+nasdaq100csv = []
+openfile(url2, nasdaq100csv)
 nasdaq100 = csv.reader(nasdaq100csv)
 
-# create a new file to skip the header in the Nasdaq file.
+# create a new file to skip the header in the Nasdaq file by calling the skipheader function.
+# Passing the current file, new file and the number of header lines in the csv file.
 nasdaqNew = []
-try:
-    next(nasdaq100)
-    for row in nasdaq100:
-        nasdaqNew.append(row)
-except StopIteration:
-    pass
-
-# create a new file to skip the header in the Dow Jones file.
+skipheader(nasdaq100, nasdaqNew, 1)
 DowNew = []
-try:
-    next(dowjones)
-    for row in dowjones:
-        DowNew.append(row)
-except StopIteration:
-    pass
+skipheader(dowjones, DowNew, 1)
 
 # Turn the files into sets. Strip out any blanks and make the Symbol of the company
 # upper case for comparison later in the script.
@@ -90,11 +92,32 @@ intersection = dowjones & nasdaq100
 dowjonesonly = dowjones - nasdaq100
 nasdaq100only = nasdaq100 - dowjones
 
+# Create files with names of companies and get out duplicate values
+Both = []
+for row in intersection:
+    Both.append(Reference.get(row).title())
+output = set(Both)
+Both = list(output)
+
+DowJonesName = []
+for row in dowjonesonly:
+    DowJonesName.append(Reference.get(row).title())
+output = set(DowJonesName)
+DowJonesName = list(output)
+
+NasdaqName = []
+# uniquelist(nasdaq100only, NasdaqName)
+for row in nasdaq100only:
+    NasdaqName.append(Reference.get(row).title())
+output = set(NasdaqName)
+NasdaqName = list(output)
+
+
 #Must specify fillvalue because the three sets are of different lengths.
 threeColumns = itertools.zip_longest(
-    sorted(dowjonesonly),
-    sorted(intersection),
-    sorted(nasdaq100only),
+    sorted(DowJonesName),
+    sorted(Both),
+    sorted(NasdaqName),
     fillvalue = ""
 )
 
@@ -103,9 +126,7 @@ print(f.format("Dow Jones Only", "     Both",        " Nasdaq 100 only"))
 print(f.format("--------------", "----------------", " ---------------"))
 
 for left, middle, right in threeColumns:
-    # use the Reference file to print out the name of the company, not the ticker
-    # symbol
-    print(f.format(Reference.get(left,"").title(), Reference.get(middle,"").title(),\
-                   Reference.get(right,"").title()))
+    # Print out the names of the companies
+    print(f.format(left, middle, right))
 
 sys.exit(0)
