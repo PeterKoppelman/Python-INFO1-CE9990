@@ -41,9 +41,14 @@ def skipheader(filename, outfile, headerlines):
     except StopIteration:
         pass
 
-# def uniquelist(input, output):
-#     for row in input:
-#         output.append(Reference.get(row).title())
+# Create a uniquelist of the companies in each list. There can be duplicate
+# company names because some companies have muliple classes of stock
+# (i.e. GOOG and GOOGL).
+def uniquelist(input, output):
+    for row in input:
+        if Reference.get(row).title() not in output:
+            output.append(Reference.get(row).title())
+            
 
 # Get the file names from the web and call openfile function.
 url1 = "https://raw.githubusercontent.com/PeterKoppelman/Python-INFO1-CE9990/master/dowjones30.csv"
@@ -59,22 +64,15 @@ openfile(url2, nasdaq100csv)
 RefDow = {row['Symbol']: row['Name'] for row in csv.DictReader(dowjonescsv, delimiter = ';')}
 RefNasdaq = {row['Symbol']: row['Name'] for row in csv.DictReader(nasdaq100csv, ('Symbol', 'Name'))}
 
-
 # Final reference dictionary combines both files.
 Reference = {}
 Reference.update(RefNasdaq)
 Reference.update(RefDow)
 
-# Re-open the files. For some reason they were closed.
-dowjonescsv = []
-openfile(url1, dowjonescsv)
+# Create new csv files to be passed to the skipheader function.
 dowjones = csv.reader(dowjonescsv, delimiter=';')
-nasdaq100csv = []
-openfile(url2, nasdaq100csv)
 nasdaq100 = csv.reader(nasdaq100csv)
 
-# create a new file to skip the header in the Nasdaq file by calling the skipheader function.
-# Passing the current file, new file and the number of header lines in the csv file.
 nasdaqNew = []
 skipheader(nasdaq100, nasdaqNew, 1)
 DowNew = []
@@ -85,33 +83,21 @@ skipheader(dowjones, DowNew, 1)
 dowjones = set([line[0].strip().upper() for line in DowNew])
 nasdaq100 = set([line[0].strip().upper() for line in nasdaqNew])
 
-
 # create three files with companies in both sets (intersection), companies that are just in
 # the Dow Jones (dowjonesonly) and companies that are just in the Nasdaq 100 (nasdaq100only).
 intersection = dowjones & nasdaq100
 dowjonesonly = dowjones - nasdaq100
 nasdaq100only = nasdaq100 - dowjones
 
-# Create files with names of companies and get out duplicate values
+# Create files with names of companies, not the ticker symbols.
 Both = []
-for row in intersection:
-    Both.append(Reference.get(row).title())
-output = set(Both)
-Both = list(output)
+uniquelist(intersection, Both)
 
 DowJonesName = []
-for row in dowjonesonly:
-    DowJonesName.append(Reference.get(row).title())
-output = set(DowJonesName)
-DowJonesName = list(output)
+uniquelist(dowjonesonly, DowJonesName)
 
 NasdaqName = []
-# uniquelist(nasdaq100only, NasdaqName)
-for row in nasdaq100only:
-    NasdaqName.append(Reference.get(row).title())
-output = set(NasdaqName)
-NasdaqName = list(output)
-
+uniquelist(nasdaq100only, NasdaqName)
 
 #Must specify fillvalue because the three sets are of different lengths.
 threeColumns = itertools.zip_longest(
