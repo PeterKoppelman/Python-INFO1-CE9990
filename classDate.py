@@ -108,10 +108,10 @@ class Date(object):
             self.day -= 1
         else:
             if self.month != 1:
-                self.day = (Date.lengths[self.month]) - 1
+                self.day = Date.lengths[self.month - 1]
                 self.month -= 1
             else:                       #Special case for January 1
-                self.day = (Date.lengths[1])
+                self.day = Date.lengths[12]
                 self.month = 12
                 self.year -= 1
 
