@@ -103,15 +103,15 @@ class Date(object):
         return sum(d.lengths[1:])
 
     # Item 6
-    def prevDay(self):
+     def prevDay(self):
         if self.day != 1:
             self.day -= 1
         else:
+            self.day = Date.lengths[self.month - 1] \
+                if self.month != 1 else Date.lengths[self.month]
             if self.month != 1:
-                self.day = Date.lengths[self.month - 1]
                 self.month -= 1
             else:                       #Special case for January 1
-                self.day = Date.lengths[12]
                 self.month = 12
                 self.year -= 1
 
