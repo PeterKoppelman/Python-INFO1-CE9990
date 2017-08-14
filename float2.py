@@ -34,7 +34,7 @@ def range(start, end, n):
     # if not isinstance(end, float) and not isinstance(end, int):
     if not (isinstance(end, float) or isinstance(end, int)):
         raise TypeError("end must be float or int, not " + str(type(end)))
-        sys.exit(1)
+        # sys.exit(1)
 
     if not isinstance(n, int):
         # raise TypeError("n must be int, not " + str(type(n)))
