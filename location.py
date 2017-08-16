@@ -29,35 +29,31 @@ class Location(object):
     #These two methods are getters.
 
     def getLatitude(self):
-        "Return latitude."
+        "Get the latitude."
         return self.latitude
 
     def getLongitude(self):
-        "Return longitude"
+        "Get the longitude"
         return self.longitude
     
     def setLatitude(self, latitude):
-        "Return latitude."
+        "Set the latitude."
         self.latitude = latitude
-        return self.latitude
+        # return self.latitude
 
     def setLongitude(self, longitude):
-        "Return longitude"
+        "Set the longitude"
         self.longitude = longitude
-        return self.longitude
+        # return self.longitude
     
 
     def __str__(self):
         "Return a string that looks like the contents of myself."
         degSym = "\u00b0"
         # Get the directions (North, East, South and West)
-        latDir = ("N" if self.latitude >= 0 else "S")
-        longDir = ("E" if self.longitude >= 0 else "W")
-        # Clean up leading zeros
-        newLatitude = str(self.latitude).lstrip("0")
-        newLongitude = str(self.longitude).lstrip("0")
-        # return "{:09}{}{}/{:09}{}{}".format(self.latitude, degSym, latDir, self.longitude, degSym, longDir)
-        return "{}{}{}/{}{}{}".format(newLatitude, degSym, latDir, newLongitude, degSym, longDir)
+        latDir = "N" if self.latitude >= 0 else "S"
+        longDir = "E" if self.longitude >= 0 else "W"
+        return "{}{}{} {}{}{}".format(self.latitude, degSym, latDir, self.longitude, degSym, longDir)
 
     def getZipcode(self):
         "Returns zipcode"
