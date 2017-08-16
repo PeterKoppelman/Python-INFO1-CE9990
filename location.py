@@ -53,7 +53,10 @@ class Location(object):
         # Get the directions (North, East, South and West)
         latDir = "N" if self.latitude >= 0 else "S"
         longDir = "E" if self.longitude >= 0 else "W"
-        return "{}{}{} {}{}{}".format(self.latitude, degSym, latDir, self.longitude, degSym, longDir)
+        newLat = self.latitude if self.latitude >= 0 else self.latitude * -1
+        newLong = self.longitude if self.longitude >= 0 else self.longitude * -1
+        # return "{}{}{} {}{}{}".format(self.latitude, degSym, latDir, self.longitude, degSym, longDir)
+        return "{}{}{} {}{}{}".format(newLat, degSym, latDir, newLong, degSym, longDir)
 
     def getZipcode(self):
         "Returns zipcode"
@@ -91,23 +94,23 @@ class Location(object):
 
         for component in address_components:                   #component is a dictionary
             if "postal_code" in component["types"]:            #component["types"] is a list of strings
-                return int(component["long_name"])             #component["long_name"] is a string that looks like a zipcode
+                # return int(component["long_name"])             #component["long_name"] is a string that looks like a zipcode
+                return component["long_name"]             #component["long_name"] is a string that looks like a zipcode
 
         return 0
 
     #The definition of classlocation ends here.
 
 
-# if __name__ == "__main__":
-    # import sys
-    # import urllib.request
-    # import json
+if __name__ == "__main__":
+    import sys
+    import urllib.request
+    import json
     # A sample latitude and longitude
-    # latitude = 40.785091
-    # longitude = -73.9818586
-    # x = Location(latitude, longitude)
-    # y = 
-    # print("Location is ", x)
-    # print("Zipcode is",
-    
-    # sys.exit(0)
+    latitude = 40.78912
+    longitude = -73.966742
+    x = Location(latitude, longitude)
+    print("Latitude and longitude are ", x)
+    print("Zipcode is", Location.getZipcode(x))
+    sys.exit(0)
+
