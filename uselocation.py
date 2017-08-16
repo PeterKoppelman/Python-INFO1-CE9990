@@ -18,6 +18,11 @@ def display(loc):
 loc = location.Location(40.7541476, -73.9818586)   #11 West 42nd Street
 display(loc)
 
+# Boston commons - check to see if format of zip code works with a leading 0
+loc.setLatitude(42.3550)
+loc.setLongitude(-71.0655)
+display(loc)
+
 #Go up to Yonkers.
 loc.setLatitude(40.921787)
 loc.setLongitude(-73.905614)
