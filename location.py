@@ -39,14 +39,11 @@ class Location(object):
     def setLatitude(self, latitude):
         "Set the latitude."
         self.latitude = latitude
-        # return self.latitude
 
     def setLongitude(self, longitude):
         "Set the longitude"
         self.longitude = longitude
-        # return self.longitude
     
-
     def __str__(self):
         "Return a string that looks like the contents of myself."
         degSym = "\u00b0"
@@ -85,22 +82,34 @@ class Location(object):
             print(jSONDecodeError)
             sys.exit(1)
 
-        results = dictionary["results"]                        #results is a list of dictionaries
-        if len(results) == 0:
-            return 0
+        # check to see if the key results is in dictionary
+        if "results" in dictionary:
+            results = dictionary["results"]                        #results is a list of dictionaries
+            if len(results) == 0:
+                return 0
+        else:
+            print("Results is not a key in dictionary")
+            sys.exit(1)
 
         firstResult = results[0]                               #firstResult is a dictionary
-        address_components = firstResult["address_components"] #address_components is a list of dictionaries
-
-        for component in address_components:                   #component is a dictionary
-            if "postal_code" in component["types"]:            #component["types"] is a list of strings
-                # return int(component["long_name"])             #component["long_name"] is a string that looks like a zipcode
-                return component["long_name"]             #component["long_name"] is a string that looks like a zipcode
-
+        # check to see if address_components is in firstResult
+        if "address_components" not in firstResult:
+            print("Address_components not a key in firstResult")
+            sys.exit(1)
+        else:
+            address_components = firstResult["address_components"] #address_components is a list of dictionaries
+            for component in address_components:                   #component is a dictionary
+                if "postal_code" in component["types"]:            #component["types"] is a list of strings
+                    # return int(component["long_name"])            #component["long_name"] is a string that looks like a zipcode
+                    # check to see if long_name is in component
+                    if "long_name" in component:
+                        return component["long_name"]                   #component["long_name"] is a string that looks like a zipcode
+                    else:
+                        print("Component does not have a long_name")
+                        sys.exit(1)
         return 0
 
-    #The definition of classlocation ends here.
-
+    #The definition of class location ends here.
 
 if __name__ == "__main__":
     import sys
@@ -113,4 +122,3 @@ if __name__ == "__main__":
     print("Latitude and longitude are ", x)
     print("Zipcode is", Location.getZipcode(x))
     sys.exit(0)
-
