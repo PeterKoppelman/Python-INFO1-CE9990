@@ -100,7 +100,6 @@ class Location(object):
             address_components = firstResult["address_components"] #address_components is a list of dictionaries
             for component in address_components:                   #component is a dictionary
                 if "postal_code" in component["types"]:            #component["types"] is a list of strings
-                    # return int(component["long_name"])            #component["long_name"] is a string that looks like a zipcode
                     # check to see if long_name is in component
                     if "long_name" in component:
                         return component["long_name"]                   #component["long_name"] is a string that looks like a zipcode
