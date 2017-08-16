@@ -11,7 +11,6 @@ def display(loc):
     assert isinstance(loc, location.Location)
     print("The latitude of {} is {}.".format(loc, loc.getLatitude()))
     print("The longitude of {} is {}.".format(loc, loc.getLongitude()))
-    # print("The zipcode of {} is {:05}.".format(loc, loc.getZipcode()))
     print("The zipcode of {} is {}.".format(loc, loc.getZipcode()))
     print()
 
