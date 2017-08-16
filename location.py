@@ -1,7 +1,7 @@
 """
 location.py
 
-PEter Koppelman August 14, 2017
+Peter Koppelman August 14, 2017
 """
 
 import urllib.request
@@ -11,21 +11,19 @@ import sys
 class Location(object):
     """
     Class Location demonstrates class and instance attributes, class and instance methods.
-    It is a simple date class, containing year, month, and day integers.
     """
 
-  
     def __init__(self, latitude, longitude):
-        if not (isinstance(latitude, int) or isinstance(longitude, float)):
-            raise TypeError("Latitude must be and integer or a float")
+        if not (isinstance(latitude, int) or isinstance(latitude, float)):
+            raise TypeError("Latitude must be an integer or a float")
         if not (isinstance(longitude, int) or isinstance(longitude, float)):
-            raise TypeError("Longitude must be and integer or a float")
+            raise TypeError("Longitude must be an integer or a float")
         if latitude < -90 or latitude > 90:
             raise ValueError("Latitude mst be between -90 and 90")
         if longitude < -180 or longitude > 180:
             raise ValueError("Longitude must be between -180 and 180")
 
-        self.latitude = latitude        
+        self.latitude = latitude
         self.longitude = longitude
 
     #These two methods are getters.
@@ -40,34 +38,33 @@ class Location(object):
     
     def setLatitude(self, latitude):
         "Return latitude."
+        self.latitude = latitude
         return self.latitude
 
     def setLongitude(self, longitude):
         "Return longitude"
+        self.longitude = longitude
         return self.longitude
     
 
     def __str__(self):
         "Return a string that looks like the contents of myself."
-        if self.latitude > 0:
-            latDir = "N"
-        else:
-            latDir = "S"
-        if self.longitude > 0:
-            longDir = "E"
-        else:
-            longDir = "W"
-            
-        return "{:09}{}/{:09}{}".format(self.latitude, latDir, self.longitude, longDir)
+        degSym = "\u00b0"
+        # Get the directions (North, East, South and West)
+        latDir = ("N" if self.latitude >= 0 else "S")
+        longDir = ("E" if self.longitude >= 0 else "W")
+        # Clean up leading zeros
+        newLatitude = str(self.latitude).lstrip("0")
+        newLongitude = str(self.longitude).lstrip("0")
+        # return "{:09}{}{}/{:09}{}{}".format(self.latitude, degSym, latDir, self.longitude, degSym, longDir)
+        return "{}{}{}/{}{}{}".format(newLatitude, degSym, latDir, newLongitude, degSym, longDir)
 
     def getZipcode(self):
         "Returns zipcode"
-        print(self.latitude)
-        print(self.longitude)
         
         # url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7541476,-73.9818586"
-        url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=self.latitude,self.longitude"
-
+        url = "https://maps.googleapis.com/maps/api/geocode/json?latlng={},{}".format(self.latitude,self.longitude)
+        
         try:
             infile = urllib.request.urlopen(url)
         except urllib.error.URLError as error:
@@ -107,9 +104,14 @@ class Location(object):
 
 # if __name__ == "__main__":
     # import sys
-    # import datetime
-    # now = datetime.datetime.now()
-    #Create a Date object holding today's date.
-    # d = Date(now.month, now.day, now.year)
-    # print("Today is ", d, ".", sep = "")
+    # import urllib.request
+    # import json
+    # A sample latitude and longitude
+    # latitude = 40.785091
+    # longitude = -73.9818586
+    # x = Location(latitude, longitude)
+    # y = 
+    # print("Location is ", x)
+    # print("Zipcode is",
+    
     # sys.exit(0)
